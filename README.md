@@ -12,5 +12,5 @@ Current maintainers:
 
 This module was built first for the French [Université Paris 8].
 
-[Form]:  
+[Form]: https://github.com/Kamelia3/Form
 [Omeka S]: https://omeka.org/s
