@@ -11,44 +11,54 @@ return [
     ],
     'form_elements' => [
         'factories' => [
-            'MetadataBrowse\Form\ConfigForm' => 'MetadataBrowse\Service\Form\ConfigFormFactory',
+            'MetadataBrowse\Omeka_s_Module_FeedImport\ConfigForm' => 'MetadataBrowse\Service\Omeka_s_Module_FeedImport\ConfigFormFactory',
         ],
     ],
-     'router' => [
+
+    'router' => [
         'routes' => [
             'admin' => [
                 'child_routes' => [
-                    'Form' => [
-                        'type' => 'Literal',
+                    'site' => [
+                        'child_routes' => [
+                            'slug' => [
+                                'child_routes' => [
+                                    'Omeka_s_Module_FeedImport' => [
+                                        'type' => \Zend\Router\Http\Literal::class,
+                                        'options' => [
+                                            'route' => '/Omeka_s_Module_FeedImport',
+                                            'defaults' => [
+                                                '__NAMESPACE__' => 'Omeka_s_Module_FeedImport\Controller\Admin',
+                                                'controller' => Controller\Admin\FormController::class,
+                                                'action' => 'create-site',
+                                            ],
+                                        ],
+                                    ],
+                                ],
+                            ],
+                        ],
+                    ],
+                    'From' => [
+                        'type' => \Zend\Router\Http\Literal::class,
                         'options' => [
-                            'route' => '/Form',
+                            'route' => '/Omeka_s_Module_FeedImport',
                             'defaults' => [
-                                '__NAMESPACE__' => 'Form\Controller',
-                                'controller' => 'Index',
-                                'action' => 'index',
+                                '__NAMESPACE__' => 'Omeka_s_Module_FeedImport\Controller\Admin',
+                                'controller' => Controller\Admin\FormController::class,
+                                'action' => 'create',
                             ],
                         ],
                         'may_terminate' => true,
                         'child_routes' => [
-                            'past-imports' => [
-                                'type' => 'Literal',
+                            'default' => [
+                                'type' => \Zend\Router\Http\Segment::class,
                                 'options' => [
-                                    'route' => '/past-imports',
-                                    'defaults' => [
-                                        '__NAMESPACE__' => 'Form\Controller',
-                                        'controller' => 'Index',
-                                        'action' => 'past-imports',
+                                    'route' => '/:action',
+                                    'constraints' => [
+                                        'action' => '[a-zA-Z][a-zA-Z0-9_-]*',
                                     ],
-                                ],
-                            ],
-                            'map' => [
-                                'type' => 'Literal',
-                                'options' => [
-                                    'route' => '/map',
                                     'defaults' => [
-                                        '__NAMESPACE__' => 'Form\Controller',
-                                        'controller' => 'Index',
-                                        'action' => 'map',
+                                        'action' => 'create',
                                     ],
                                 ],
                             ],
@@ -58,17 +68,19 @@ return [
             ],
         ],
     ],
+
+
     'navigation' => [
         'AdminModule' => [
             [
-                'label' => 'Form',
-                'route' => 'admin/Form',
-                'resource' => 'Form\Controller\Index',
+                'label' => 'Omeka_s_Module_FeedImport',
+                'route' => 'admin/Omeka_s_Module_FeedImport',
+                'resource' => 'Omeka_s_Module_FeedImport\Controller\Index',
                 'pages' => [
                     [
                         'label'      => 'Import', // @translate
-                        'route'      => 'admin/Form',
-                        'resource'   => 'Form\Controller\Index',
+                        'route'      => 'admin/Omeka_s_Module_FeedImport',
+                        'resource'   => 'Omeka_s_Module_FeedImport\Controller\Index',
                     ],
                 ],
             ],
