@@ -1,3 +1,5 @@
+<?php
+namespace Omeka_s_Module_FeedImport;
 return [
     'view_manager' => [
         'template_path_stack' => [
@@ -38,13 +40,13 @@ return [
                             ],
                         ],
                     ],
-                    'From' => [
+                    'Omeka_s_Module_FeedImport' => [
                         'type' => \Zend\Router\Http\Literal::class,
                         'options' => [
                             'route' => '/Omeka_s_Module_FeedImport',
                             'defaults' => [
                                 '__NAMESPACE__' => 'Omeka_s_Module_FeedImport\Controller\Admin',
-                                'controller' => Controller\Admin\FormController::class,
+                                'controller' => Controller\Admin\Omeka_s_Module_FeedImportController::class,
                                 'action' => 'create',
                             ],
                         ],
